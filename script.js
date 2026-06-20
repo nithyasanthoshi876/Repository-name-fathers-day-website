@@ -11,10 +11,18 @@ function togglePhoto(photoId) {
 function playMusic() {
     const music = document.getElementById("bgMusic");
 
-    music.play().catch(function(error) {
-        console.log(error);
-    });
+    music.currentTime = 0;
+
+    music.play()
+        .then(() => {
+            console.log("Music started");
+        })
+        .catch(err => {
+            console.error("Audio error:", err);
+            alert("Music could not start. Press F12 and check Console.");
+        });
 }
+
 
 window.onload = function () {
     const photos = document.querySelectorAll(".hidden-photo");
