@@ -34,17 +34,32 @@ function createPetals() {
         petal.innerHTML = Math.random() > 0.5 ? "❤️" : "🌸";
 
         petal.style.position = "fixed";
-        petal.style.left = Math.random() * window.innerWidth + "px";
+        petal.style.left = Math.random() * 100 + "vw";
         petal.style.top = "-50px";
 
-        petal.style.fontSize =
-            (20 + Math.random() * 25) + "px";
+        petal.style.fontSize = (20 + Math.random() * 30) + "px";
 
-        petal.style.zIndex = "9999";
         petal.style.pointerEvents = "none";
+        petal.style.zIndex = "9999";
 
-        petal.style.animation =
-            "fall " + (5 + Math.random() * 5) + "s linear forwards";
+        const drift = (Math.random() - 0.5) * 400;
+
+        petal.animate(
+            [
+                {
+                    transform: "translate(0px,-50px) rotate(0deg)",
+                    opacity: 1
+                },
+                {
+                    transform: `translate(${drift}px,110vh) rotate(720deg)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 6000 + Math.random() * 4000,
+                easing: "linear"
+            }
+        );
 
         document.body.appendChild(petal);
 
@@ -52,5 +67,5 @@ function createPetals() {
             petal.remove();
         }, 10000);
 
-    }, 200);
+    }, 150);
 }
