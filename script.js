@@ -11,18 +11,10 @@ function togglePhoto(photoId) {
 function playMusic() {
     const music = document.getElementById("bgMusic");
 
-    music.currentTime = 0;
-
-    music.play()
-        .then(() => {
-            console.log("Music started");
-        })
-        .catch(err => {
-            console.error("Audio error:", err);
-            alert("Music could not start. Press F12 and check Console.");
-        });
+    music.play().catch(function(error) {
+        console.log(error);
+    });
 }
-
 
 window.onload = function () {
     const photos = document.querySelectorAll(".hidden-photo");
@@ -30,4 +22,30 @@ window.onload = function () {
     photos.forEach(function(photo) {
         photo.style.display = "none";
     });
+
+    createPetals();
 };
+
+function createPetals() {
+    const petals = document.getElementById("petals");
+
+    setInterval(() => {
+
+        const petal = document.createElement("div");
+
+        petal.className = "petal";
+        petal.innerHTML = Math.random() > 0.5 ? "🌸" : "❤️";
+
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.fontSize = (20 + Math.random() * 20) + "px";
+        petal.style.animationDuration =
+            (5 + Math.random() * 5) + "s";
+
+        petals.appendChild(petal);
+
+        setTimeout(() => {
+            petal.remove();
+        }, 10000);
+
+    }, 300);
+}
